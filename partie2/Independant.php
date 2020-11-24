@@ -1,10 +1,14 @@
 <?php
 include_once('Employe.php');
+include_once('InvoiceBuilder.php');
 
 class Independant extends Employe
 {
   public $siren;
-  public $invoices = [];
+  public $invoiceList;
+  public $type='Independant';
+  
+
 
   public function __construct($name, $lastname, $age, $year, $siren, $invoices)
   {
@@ -12,12 +16,6 @@ class Independant extends Employe
     $this->siren = $siren;
     $this->invoices = $invoices;
   }
-
-  public function addInvoice($invoice)
-  {
-      $this->invoices[] = $invoice;
-  }
-
   public function getName()
   {
     return "Employé indépendant: '$this->name'";
@@ -33,22 +31,41 @@ class Independant extends Employe
     }
     return $totalAmount;
   }
+
+  public function getType() {
+    return $this->type;
+  }
+
+  public function getInvoiceList()
+  {
+    return $this->invoiceList;
+  }
 }
 
 class Invoice
 {
+
+  // public function __construct($date, $amount, $label)
+  // {
+  //   $this->date = $date;
+  //   $this->amount = $amount;
+  //   $this->label = $label;
+  // }
+
+  // utilisation de builder -> InvoiceBuilder
+
   public $date;
   public $amount;
   public $label;
 
-  public function __construct($date, $amount, $label)
+  public function __construct(InvoiceBuilder $invoiceBuilder)
   {
-    $this->date = $date;
-    $this->amount = $amount;
-    $this->label = $label;
+    $this->date = $invoiceBuilder->date;
+    $this->amount = $invoiceBuilder->amount;
+    $this->label = $invoiceBuilder->label;
   }
 
-  public function getLabel()
+   public function getLabel()
   {
     return $this->label;
   }
@@ -57,4 +74,5 @@ class Invoice
   {
     return $this->getAmount;
   }
+  
 }

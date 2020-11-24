@@ -24,6 +24,7 @@ abstract class Employe
 class Salesman extends Employe
 {
   public $ca;
+  public $type='Salesman';
 
   public function __construct($name, $lastname, $age, $year, $ca) {
     parent::__construct($name, $lastname, $age, $year);
@@ -32,11 +33,15 @@ class Salesman extends Employe
   public function getSalary() {
     return ($this->ca * 0.2) + 400;
   }
+  public function getType() {
+    return $this->type;
+  }
 }
 
 class Representant extends Employe
 {
   public $ca;
+  public $type='Representant';
 
   public function __construct($name, $lastname, $age, $year, $ca) {
     parent::__construct($name, $lastname, $age, $year);
@@ -45,11 +50,15 @@ class Representant extends Employe
   public function getSalary() {
     return ($this->ca * 0.2) + 800;
   }
+  public function getType() {
+    return $this->type;
+  }
 }
 
 class Producer extends Employe
 {
   public $nbUnits;
+  public $type='Producer';
 
   public function __construct($name, $lastname, $age, $year, $nbUnits) {
     parent::__construct($name, $lastname, $age, $year);
@@ -58,11 +67,15 @@ class Producer extends Employe
   public function getSalary() {
     return $this->nbUnits * 5;
   }
+  public function getType() {
+    return $this->type;
+  }
 }
 
 class Wharehouseman extends Employe
 {
   public $nbHour;
+  public $type='Wharehouseman';
 
   public function __construct($name, $lastname, $age, $year, $nbHour) {
     parent::__construct($name, $lastname, $age, $year);
@@ -71,22 +84,33 @@ class Wharehouseman extends Employe
   public function getSalary() {
     return $this->nbHour * 65;
   }
+  public function getType() {
+    return $this->type;
+  }
 }
 
 class ProducerWithRisk extends Producer
 {
   public $nbUnits;
+  public $type='ProducerWithRisk';
     
   public function getSalary() {
     return parent::getSalary() + 200;
+  }
+  public function getType() {
+    return $this->type;
   }
 }
 
 class WharehousemanWithRisk extends Wharehouseman
 {
   public $nbHour;
+  public $type='WharehousemanWithRisk';
 
   public function getSalary() {
     return parent::getSalary() + 200;
+  }
+  public function getType() {
+    return $this->type;
   }
 }
